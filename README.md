@@ -7,7 +7,7 @@ with an optimized CVDD algorithm, and integrating outputs through ensemble learn
 detecting fund misuse.
 > 
  > > This project provides a small `test` dataset at `data/corporra/test.xlsx`, for code execution testing and dataset format reference. 
-It is also compatible with the public datasets Reuters-21578, 20 Newsgroups, IMDB Movie Reviews, 
+It is also compatible with the public datasets `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/), 20 Newsgroups, IMDB Movie Reviews, 
 as well as the non-public datasets Dataset1 and Dataset2.
 
 
