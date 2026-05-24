@@ -34,9 +34,9 @@ Next, I will briefly explain how to run the `test` dataset.
 You can run other datasets by replacing the dataset file read 
 by `pandas` in `src/main.py` and `scr/datasets/***.py`.
 
+
 ### Dataset：[`test`]
-Here's an example on `Data1` with `'OfficialReception'` (`--normal_class 6`) considered to be the normal class using fine-tuned`bert-base-chinese` word
-embeddings for a BERT-OCEn model.
+Here is an example of running a dataset: `test` on a subset of data from dataset: `Dataset1`.using fine-tuned`bert-base-chinese` word embeddings for a BERT-OCEn model. 
 ```
 cd <path-to-BERT-OCEn-directory>
 
@@ -52,6 +52,7 @@ mkdir ../log/test_yixing
 # run experiment
  python main.py yixing cvdd_Net ../log/test_yixing ../data  --device cuda --seed 1 --clean_txt --embedding_size 768 --pretrained_model bert --ad_score context_dist_mean --n_attention_heads 4  --attention_size 300 --lambda_p 1.0 --alpha_scheduler logarithmic --n_epochs 100 --lr 0.01 --lr_milestone 40 --train_proportion 0.01 --finetune 1 --normal_class 100 --ensemble stacking;
 ```
+
 
 
 Have a look into `main.py` for all the possible arguments and options.
