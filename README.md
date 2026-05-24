@@ -2,11 +2,11 @@
 
 
 ## Abstract
-> > This code implements a three-step pipeline: fine-tuning the BERT language model, performing one-class classification 
+> > Code: This code implements a three-step pipeline: fine-tuning the BERT language model, performing one-class classification 
 with an optimized CVDD algorithm, and integrating outputs through ensemble learning techniques, thereby effectively 
 detecting fund misuse.
 > 
- > > This project provides a small `test` dataset at `data/corporra/test.xlsx`, for code execution testing and dataset format reference. 
+ > > Dataste: This project provides a small `test` dataset at `data/corporra/test.xlsx`, for code execution testing and dataset format reference. 
 It is also compatible with the public datasets  
 >  > `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/),  
 >  >  `20 Newsgroups`(http://qwone.com/~jason/20Newsgroups/),  
