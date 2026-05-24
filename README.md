@@ -11,7 +11,7 @@ It is also compatible with the public datasets
 >  > `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/),  
 >  >  `20 Newsgroups`(http://qwone.com/~jason/20Newsgroups/),  
 >  >  `IMDB Movie Reviews`(https://ai.stanford.edu/~amaas/data/sentiment/),  
->  > as well as the classified datasets Dataset1 at  `data/corporra/yixiing.xlsx` and Dataset2 at `data/corporra/nanchang.xlsx`.
+>  > as well as the non-public datasets Dataset1 at  `data/corporra/yixiing.xlsx` and Dataset2 at `data/corporra/nanchang.xlsx`.They originate from a certain government agency and have undergone anonymization and partial processing.
 
 ## Installation
 This code is written in `Python 3.7` and requires the packages listed in `requirements.txt`.
