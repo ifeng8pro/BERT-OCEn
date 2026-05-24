@@ -50,9 +50,7 @@ cd src
 mkdir ../log/test_yixing
 
 # run experiment
- python main.py yixing cvdd_Net ../log/test_yixing ../data  --device cuda --seed 1 --clean_txt --embedding_size 768 --pretraine
-d_model bert --ad_score context_dist_mean --n_attention_heads 4  --attention_size 300 --lambda_p 1.0 --alpha_scheduler logarithmic --n_epochs 100 --lr 0.01 --lr_milestone 40 --train_proportion 0.01 --finetune
- 1 --normal_class 100 --ensemble stacking;
+ python main.py yixing cvdd_Net ../log/test_yixing ../data  --device cuda --seed 1 --clean_txt --embedding_size 768 --pretrained_model bert --ad_score context_dist_mean --n_attention_heads 4  --attention_size 300 --lambda_p 1.0 --alpha_scheduler logarithmic --n_epochs 100 --lr 0.01 --lr_milestone 40 --train_proportion 0.01 --finetune 1 --normal_class 100 --ensemble stacking;
 ```
 
 
