@@ -8,9 +8,11 @@ detecting fund misuse.
 > 
  > > This project provides a small `test` dataset at `data/corporra/test.xlsx`, for code execution testing and dataset format reference. 
 It is also compatible with the public datasets
+>  > 
 >  > `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/),
 >  >  `20 Newsgroups`(http://qwone.com/~jason/20Newsgroups/),
 >  >  `IMDB Movie Reviews`(https://ai.stanford.edu/~amaas/data/sentiment/),
+>  > 
 as well as the non-public datasets Dataset1 and Dataset2.
 
 
