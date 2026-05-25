@@ -6,12 +6,12 @@
 with an optimized CVDD algorithm, and integrating outputs through ensemble learning techniques, thereby effectively 
 detecting fund misuse.
 > 
- > > Dataset: This project provides a small `test` dataset at `data/corporra/test.xlsx`, for code execution testing and dataset format reference. 
+ > > Dataset: This project provides a small `test` dataset at `data/corpora/test.xlsx`, for code execution testing and dataset format reference. 
 It is also compatible with the public datasets  
 >  > `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/),  
 >  >  `20 Newsgroups`(http://qwone.com/~jason/20Newsgroups/),  
 >  >  `IMDB Movie Reviews`(https://ai.stanford.edu/~amaas/data/sentiment/),  
->  > as well as the non-public datasets Dataset1 at  `data/corporra/yixiing.xlsx` and Dataset2 at `data/corporra/nanchang.xlsx`.They originate from a certain government agency and have undergone anonymization and partial processing.
+>  > as well as the non-public datasets Dataset1 at  `data/corpora/yixing.xlsx` and Dataset2 at `data/corpora/nanchang.xlsx`.They originate from a certain agency and have undergone anonymization and partial processing.
 
 ## Installation
 This code is written in `Python 3.7` and requires the packages listed in `requirements.txt`.
