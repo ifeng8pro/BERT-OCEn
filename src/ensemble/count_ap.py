@@ -2,19 +2,12 @@ import pandas as pd
 
 """    
 This code is used to compute the Average Precision (AP) by sorting based on the post-integration confidence scores.
-
-Dataset Chinese Explanations:
-    'OfficialReception(公务接待)', ' OfficialVehicles(公务用车)' '  ConventionExpense(会议培训)',
-    ' Remuneration(人员薪酬)'' PropertyManagement(物业管理)'' Procurement(设备/服务采购)',' NULL(空)',
-    are the class label in the dataset.
-    'Purpose(用途)', 'Category(类别)' are the column headers in the table.
 """
-
 
 
 def main():
     df_data = pd.read_excel('../../result/result/finetune_one_class_score_yixing.xlsx')
-    class_label = ['公务接待', '公务用车', '会议培训', '人员薪酬', '物业管理', '设备/服务采购']
+    class_label = ['OfficialReception', 'OfficialVehicles', 'ConventionExpense', 'Remuneration', 'PropertyManagement', 'Procurement']
     results = []
 
     ap1 = apk_single_class(df_data, class_label, k_max=500)
@@ -33,7 +26,7 @@ def main():
 def apk_single_class(df_data, class_label, k_max=0):
 
     df_sorted = df_data.sort_values(by='confidence', ascending=False)
-    y_pred = df_sorted['类别'].values.tolist()
+    y_pred = df_sorted['Category'].values.tolist()
     if k_max != 0:
         y_pred = y_pred[:k_max]
     y_true = [x for x in y_pred if x in class_label]
