@@ -143,8 +143,6 @@ def r8_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     Returns:
         Tuple containing (train_dataset, test_dataset)
 
-    Dataset Chinese Explanations:
-        'Purpose(用途)', 'Category(类别)' are the column headers in the table.
     """
 
 
