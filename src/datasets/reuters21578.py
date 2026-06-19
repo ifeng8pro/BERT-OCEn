@@ -71,7 +71,7 @@ class Reuters_Dataset(TorchnlpDataset):
 
             row['text'] = row['text'].lower()
             text_for_bert.append(row['text'])  # for finetune
-        df_data = pd.DataFrame({'用途': text_for_bert, 'label': label_for_bert,'类别':class_labels})
+        df_data = pd.DataFrame({'Purpose': text_for_bert, 'label': label_for_bert,'Category':class_labels})
 
 
 
