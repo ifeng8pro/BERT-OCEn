@@ -142,7 +142,6 @@ def r8_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
 
     Returns:
         Tuple containing (train_dataset, test_dataset)
-
     """
 
 
