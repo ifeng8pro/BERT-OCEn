@@ -68,7 +68,7 @@ def main(dataset_name, net_name, train_proportion,xp_path, data_path, load_confi
          embedding_size, pretrained_model, ad_score, n_attention_heads, attention_size, lambda_p, alpha_scheduler,
          optimizer_name, lr, n_epochs, lr_milestone, batch_size, weight_decay, n_jobs_dataloader, n_threads,
          normal_class,finetune,ensemble):
-    # 检查GPU是否可用
+    # Check if the GPU is available
     print(f"Using device: {device}")
 
     """
@@ -96,7 +96,7 @@ def main(dataset_name, net_name, train_proportion,xp_path, data_path, load_confi
 
         dataset_result.to_excel("../result/finetune_one_class_score_yixing.xlsx")
 
-        # 如果启用集成
+        # If ensemble is enabled
         if ensemble is not None:
             print(f"*** Starting integration of single-class classification score results ***")
             run_ensemble_analysis(
