@@ -11,7 +11,8 @@ import time
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Define absolute path for BERT
-bert_dir = r"D:\Student\202507sci\github项目\CVDD-PyTorch-master\data\bert_cache\chinese"
+# Replace with the path to your local bert-base-chinese model directory.
+bert_dir = r"D:\Student\202507sci\github\CVDD-PyTorch-master\data\bert_cache\chinese"  
 bert = BertModel.from_pretrained(pretrained_model_name_or_path='bert-base-chinese', cache_dir=bert_dir)
 tokenizer = BertTokenizer.from_pretrained(pretrained_model_name_or_path='bert-base-chinese', cache_dir=bert_dir)
 
@@ -76,7 +77,7 @@ def real_training(model, train_texts, train_labels, tokenizer, batch_size=32, ma
         for text, label in zip(texts, labels):
             # Use legacy tokenizer encoding method
             tokenized_text = tokenizer.tokenize(text)
-            if len(tokenized_text) > max_len - 2:  # 考虑[CLS]和[SEP]
+            if len(tokenized_text) > max_len - 2:  # Considering [CLS] and [SEP]
                 tokenized_text = tokenized_text[:max_len - 2]
 
             # Add special tokens and convert to ids
@@ -159,7 +160,7 @@ def real_training(model, train_texts, train_labels, tokenizer, batch_size=32, ma
     # 3. Optimizer and scheduler
     #optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=2e-5, betas=(0.9, 0.999), eps=1e-8)
     total_steps = len(train_loader) * epochs
-    warmup_steps = int(0.1 * total_steps)  # 10%预热
+    warmup_steps = int(0.1 * total_steps)  # 10% warmup
     #scheduler = get_linear_schedule_with_warmup(optimizer, warmup_steps, total_steps)
     # Prepare optimizer and loss function
     optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=2e-5)
@@ -236,7 +237,7 @@ def save_finetuned_bert(model, save_path):
 
 
 
-# 7. 主函数：从train_set和test_set微调BERT
+# 7. Main function: Fine-tune BERT on train_set and test_set
 def fine_tune_from_datasets(train_set, normal_classes, epochs=10, batch_size=32, max_len=128):
 
     """
