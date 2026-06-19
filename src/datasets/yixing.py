@@ -147,6 +147,7 @@ def yx23_dataset(directory='../data', train=True, test=False, clean_txt=False, t
 
     # Check for required columns
     required_columns = ['index', 'Purpose', 'Category']
+    
     for col in required_columns:
         if col not in df_data.columns:
             raise ValueError(f"Dataset missing required column: {col}")
