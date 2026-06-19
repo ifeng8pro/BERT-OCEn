@@ -87,7 +87,7 @@ Key components:
 ## Requirements
 
 - Python **3.7**
-- PyTorch >= 1.7
+- PyTorch == 1.13
 - CUDA-enabled GPU (recommended)
 
 Install dependencies:
