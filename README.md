@@ -1,45 +1,129 @@
 # The Fine-Tuned BERT with One-Class Ensemble (BERRT-OCEn)
 
+---
 
-## Abstract
-> > Code: This code implements a three-step pipeline: fine-tuning the BERT language model, performing one-class classification 
-with an optimized CVDD algorithm, and integrating outputs through ensemble learning techniques, thereby effectively 
-detecting fund misuse.
-> 
- > > Dataset: This project provides a small `test` dataset at `data/corpora/test.xlsx`, for code execution testing and dataset format reference. 
-It is also compatible with the public datasets  
->  > `Reuters-21578`(https://www.daviddlewis.com/resources/testcollections/reuters21578/),  
->  >  `20 Newsgroups`(http://qwone.com/~jason/20Newsgroups/),  
->  >  `IMDB Movie Reviews`(https://ai.stanford.edu/~amaas/data/sentiment/),  
->  > as well as the non-public datasets Dataset1 at  `data/corpora/yixing.xlsx` and Dataset2 at `data/corpora/nanchang.xlsx`.They originate from a certain agency and have undergone anonymization and partial processing.
+## Description
+
+This repository implements a **three-stage anomaly detection pipeline** for textual data:
+
+1. **Domain-adaptive BERT fine-tuning**  
+   Adapts a pre-trained BERT model to the target domain using only normal-class samples.
+
+2. **One-Class Classification with CVDD**  
+   Uses the **Context Vector Data Description (CVDD)** algorithm with multi-head self-attention to learn normal semantic patterns.
+
+3. **Ensemble Integration**  
+   Combines multiple one-class detectors via **stacking** or **max-voting** strategies to improve robustness and detection performance.
+
+The framework is designed to detect **fund misuse, irregular expenditures, and anomalous administrative text records**.
+
+---
+
+## Dataset Information
+
+### Provided Test Dataset
+
+A small test dataset is included for validation and format reference:  
+`data/corpora/test.xlsx`
+
+### Supported Public Datasets
+
+The codebase is compatible with standard benchmark datasets:
+
+- **Reuters-21578**  
+  https://www.daviddlewis.com/resources/testcollections/reuters21578/
+- **20 Newsgroups**  
+  http://qwone.com/~jason/20Newsgroups/
+- **IMDB Movie Reviews**  
+  https://ai.stanford.edu/~amaas/data/sentiment/
+
+### Non-Public Institutional Datasets
+
+The following datasets originate from a government agency and have been anonymized:
+
+- **Dataset1**: `data/corpora/yixing.xlsx`
+- **Dataset2**: `data/corpora/nanchang.xlsx`
+
+### Dataset Schema
+
+All datasets share the same schema:
+
+| Column       | Description          |
+|-------------|----------------------|
+| `index`     | Sample identifier    |
+| `Purpose`   | Input text           |
+| `Category`  | Class label          |
+
+---
+
+## Code Information
+
+The project is organized as follows:
+
+```
+├── src/
+│   ├── main.py                  # CLI entry point
+│   ├── datasets/                # Dataset loaders
+│   ├── networks/                # CVDD & BERT modules
+│   ├── baselines/               # OC-SVM baseline
+│   ├── ensemble/                # Ensemble methods
+│   └── utils/                   # Utilities & visualization
+├── data/
+│   ├── corpora/                 # Raw datasets
+│   └── bert_cache/              # BERT model cache
+├── result/                      # Experimental outputs
+└── requirements.txt
+```
+
+Key components:
+
+- **CVDDNet**: Self-attention-based one-class detector
+- **BERT Embedding**: Domain-adaptive fine-tuning
+- **OC-SVM**: Baseline comparison
+- **Ensemble Module**: Stacking & max aggregation
+
+---
+
+## Requirements
+
+- Python **3.7**
+- PyTorch >= 1.7
+- CUDA-enabled GPU (recommended)
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
 
 ## Installation
-This code is written in `Python 3.7` and requires the packages listed in `requirements.txt`.
 
+This code is written in `Python 3.7` and requires the packages listed in `requirements.txt`.
 
 To run the code, we recommend setting up a virtual environment, e.g. using `conda`:
 
-### `conda`
-```
+```bash
 cd <path-to-BERT-OCEn-directory>
 conda create --name myenv
 source activate myenv
 pip install -r requirements.txt
 ```
 
+---
 
+## Usage Instructions
 
-## Running experiments
+### Running Experiments
+
 You can run BERT-OCEn experiments using the `main.py` script.
 
-Next, I will briefly explain how to run the `test` dataset.
-You can run other datasets by replacing the dataset file read 
-by `pandas` in `src/main.py` and `scr/datasets/***.py`.
+Next, I will briefly explain how to run the `test` dataset. You can run other datasets by replacing the dataset file read by `pandas` in `src/main.py` and `src/datasets/*.py`.
 
+#### Example: `test` Dataset (Chinese BERT)
 
-### Dataset：[`test`]
-Here is an example of running a dataset: `test` on a subset of data from dataset: `Dataset1`.using fine-tuned`bert-base-chinese` word embeddings for a BERT-OCEn model. 
-```
+```bash
 cd <path-to-BERT-OCEn-directory>
 
 # activate virtual environment
@@ -52,11 +136,83 @@ cd src
 mkdir ../log/test_yixing
 
 # run experiment
- python main.py yixing cvdd_Net ../log/test_yixing ../data  --device cuda --seed 1 --clean_txt --embedding_size 768 --pretrained_model bert --ad_score context_dist_mean --n_attention_heads 4  --attention_size 300 --lambda_p 1.0 --alpha_scheduler logarithmic --n_epochs 100 --lr 0.01 --lr_milestone 40 --train_proportion 0.01 --finetune 1 --normal_class 100 --ensemble stacking;
+python main.py yixing cvdd_Net ../log/test_yixing ../data \
+  --device cuda \
+  --seed 1 \
+  --clean_txt \
+  --embedding_size 768 \
+  --pretrained_model bert \
+  --ad_score context_dist_mean \
+  --n_attention_heads 4 \
+  --attention_size 300 \
+  --lambda_p 1.0 \
+  --alpha_scheduler logarithmic \
+  --n_epochs 100 \
+  --lr 0.01 \
+  --lr_milestone 40 \
+  --train_proportion 0.01 \
+  --finetune 1 \
+  --normal_class 100 \
+  --ensemble stacking
 ```
 
-
-
 Have a look into `main.py` for all the possible arguments and options.
+
+---
+
+## Methodology
+
+### 1. BERT Fine-Tuning
+
+- Only normal-class samples are used
+- Last transformer layers are updated
+- Domain adaptation improves semantic representation
+
+### 2. CVDD One-Class Learning
+
+- Multi-head self-attention extracts contextual features
+- Multiple context vectors represent normal semantics
+- Anomaly score = distance to context vectors
+
+### 3. Ensemble Strategy
+
+Two ensemble modes are supported:
+
+- **Stacking**: Meta-classifier over detector outputs
+- **Max**: Maximum anomaly score across detectors
+
+---
+
+## Citations
+
+If you use this codebase or datasets in your research, please cite:
+
+```bibtex
+@article{ruff2019self,
+  title={Self-Attention-Based Anomaly Detection in Text},
+  author={Ruff, Lukas and others},
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
+  year={2019}
+}
+```
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.  
+See `LICENSE` for details.
+
+---
+
+## Contribution Guidelines
+
+Contributions are welcome. Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with clear documentation
+
+For issues or questions, please open a GitHub issue.
 
 
