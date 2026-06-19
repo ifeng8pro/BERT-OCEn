@@ -16,12 +16,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class MyClass:
     def __init__(self, dataset_result, train_indices):
-        """"    Dataset Chinese Explanations:
-        'Purpose(用途)', 'Category(类别)' are the column headers in the table.
-        'OfficialReception(公务接待)', ' OfficialVehicles(公务用车)' '  ConventionExpense(会议培训)',
-        ' Remuneration(人员薪酬)'' PropertyManagement(物业管理)'' Procurement(设备/服务采购)',' NULL(空)',
-        are the class label in the dataset.
-        """
         self.df_data = dataset_result
         self.df_train = self.df_data.iloc[train_indices]
         self.df_train_index = train_indices
@@ -34,8 +28,8 @@ class MyClass:
 
     def Max(self):
         data = self.df_data.loc[self.df_test_index]
-        data['predict'] = "空"
-        count_label = data['类别'].value_counts().to_dict()
+        data['predict'] = "NULL"
+        count_label = data['Category'].value_counts().to_dict()
         care_labels = []
         cols = []
         # print(count_label)
@@ -68,7 +62,7 @@ class MyClass:
         # print(data['predict'].value_counts().to_dict())
 
         y_predict = data['predict'].values.tolist()
-        y_test = data['类别'].values.tolist()
+        y_test = data['Category'].values.tolist()
 
         return y_predict, y_test
 
@@ -77,9 +71,9 @@ class MyClass:
         cols = ['0','1','2','3','4','5']
         scaler = StandardScaler()
 
-        y_train = data.loc[self.df_train_index, '类别'].values.tolist()
+        y_train = data.loc[self.df_train_index, 'Category'].values.tolist()
         x_train = scaler.fit_transform(data.loc[self.df_train_index, cols].values)
-        y_test = data.loc[self.df_test_index, '类别'].values.tolist()
+        y_test = data.loc[self.df_test_index, 'Category'].values.tolist()
         x_test = scaler.fit_transform(data.loc[self.df_test_index, cols].values)
 
         # Train with optimal parameters
@@ -106,9 +100,7 @@ def run_ensemble_analysis(ensemble_method,dataset_result, train_indices):
     elif ensemble_method == "max":
         y_predict, y_test = my_instance.Max()
 
-
-
-    category_names = ['公务接待', '公务用车', '会议培训', '人员薪酬', '物业管理', '设备/服务采购', '空']
+    category_names = ['OfficialReception', 'OfficialVehicles', 'ConventionExpense', 'Remuneration', 'PropertyManagement', 'Procurement', 'NULL']
     a = Counter(y_predict)
     output_temp = classification_report(y_test, y_predict, output_dict=True, digits=3)  # output_dict=True
     #print(output_temp)
