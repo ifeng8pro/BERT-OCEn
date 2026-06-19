@@ -169,7 +169,7 @@ def real_training(model, train_texts, train_labels, tokenizer, batch_size=32, ma
     # Record warmup start time
     warmup_start = time.time()
     # Training loop
-    print(f"begin training，there are {epochs} epoch...")
+    print(f"begin training. there are {epochs} epoch...")
     print("!The first batch loading is time-consuming. waiting!")
     # Start loop training model (main fine-tuning process)
     for epoch in range(epochs): #epochs=4
