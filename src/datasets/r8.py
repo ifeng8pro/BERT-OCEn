@@ -72,7 +72,7 @@ class R8_Dataset(TorchnlpDataset):
             text_for_bert.append(row['text'])  # for finetune
 
 
-        # 加入微调获取原始数据的截断
+        
         #self.input_ids, self.attention_masks, self.labels = encode_texts(text_for_bert, label_for_bert)  # for finetune
 
 
@@ -154,7 +154,7 @@ def r8_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     df_data = pd.read_excel(directory + '/corpora/r8.xlsx')
 
     # Check for required columns
-    required_columns = ['index', '用途', '类别']   # Dataset Chinese Explanations:
+    required_columns = ['index', 'Purpose', 'Category']   # Dataset Chinese Explanations:
     for col in required_columns:
         if col not in df_data.columns:
             raise ValueError(f"Dataset missing required column: {col}")
@@ -164,7 +164,7 @@ def r8_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     test_examples = []
 
     # Group by category and sample training data
-    grouped = df_data.groupby('类别')
+    grouped = df_data.groupby('Category')
     for label, group in grouped:
         # Calculate number of training samples for this category
         class_total = len(group)
@@ -179,14 +179,14 @@ def r8_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
         for idx, row in train_group.iterrows():
             train_examples.append({
                 'my_index': row['index'],
-                'text': str(row['用途']),
-                'label': row['类别']
+                'text': str(row['Purpose']),
+                'label': row['Category']
             })
 
     # Get all data for testing
     index_test = df_data['index'].values.tolist()
-    label_test = df_data['类别'].values.tolist()
-    text_test = df_data['用途'].values.tolist()
+    label_test = df_data['Category'].values.tolist()
+    text_test = df_data['Purpose'].values.tolist()
 
     for index, text in enumerate(text_test):
         test_examples.append({
