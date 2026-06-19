@@ -33,7 +33,7 @@ class CVDDNet(BaseNet):
         hidden = self.pretrained_model(x)
 
         # remove the first dimension of self.c
-        c_vectors = self.c.squeeze(0)  # 从(1, 3, 768)变为(3, 768)
+        c_vectors = self.c.squeeze(0)  # from(1, 3, 768)to(3, 768)
 
 
         # hidden.shape = (sentence_length, batch_size, hidden_size)
