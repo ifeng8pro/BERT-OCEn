@@ -180,20 +180,7 @@ Two ensemble modes are supported:
 - **Stacking**: Meta-classifier over detector outputs
 - **Max**: Maximum anomaly score across detectors
 
----
 
-## Citations
-
-If you use this codebase or datasets in your research, please cite:
-
-```bibtex
-@article{ruff2019self,
-  title={Self-Attention-Based Anomaly Detection in Text},
-  author={Ruff, Lukas and others},
-  journal={IEEE Transactions on Neural Networks and Learning Systems},
-  year={2019}
-}
-```
 
 ---
 
