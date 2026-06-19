@@ -146,7 +146,7 @@ def yx23_dataset(directory='../data', train=True, test=False, clean_txt=False, t
     df_data = pd.read_excel(directory + '/corpora/test.xlsx')
 
     # Check for required columns
-    required_columns = ['index', 'Purpose', 'Category']   # Dataset Chinese Explanations:
+    required_columns = ['index', 'Purpose', 'Category']
     for col in required_columns:
         if col not in df_data.columns:
             raise ValueError(f"Dataset missing required column: {col}")
