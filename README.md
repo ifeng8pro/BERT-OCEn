@@ -79,7 +79,6 @@ Key components:
 
 - **CVDDNet**: Self-attention-based one-class detector
 - **BERT Embedding**: Domain-adaptive fine-tuning
-- **OC-SVM**: Baseline comparison
 - **Ensemble Module**: Stacking & max aggregation
 
 ---
