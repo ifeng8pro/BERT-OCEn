@@ -25,12 +25,8 @@ class Nanchang_Dataset(TorchnlpDataset):
         self.n_classes = 2  # 0: normal, 1: outlier
         #classes = ['earn', 'acq', 'crude', 'trade', 'money-fx', 'interest', 'ship']
 
-        """    Dataset Chinese Explanations:
-        'OfficialReception(公务接待)', ' OfficialVehicles(公务用车)' '  ConventionExpense(会议培训)',
-        ' Remuneration(人员薪酬)'' PropertyManagement(物业管理)'' Procurement(设备/服务采购)',' NULL(空)'
-        are the class label in the dataset.
-        """
-        classes = ['公务接待', '公务用车', '会议培训', '人员薪酬', '物业管理', '设备/服务采购', '空']
+
+        classes = ['OfficialReception', 'OfficialVehicles', 'ConventionExpense', 'Remuneration', 'PropertyManagement', 'Procurement', 'NULL']
 
         self.normal_classes = [classes[normal_class]]
         print('self.normal_classes',self.normal_classes)
@@ -142,8 +138,6 @@ def nc_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     Returns:
         Tuple containing (train_dataset, test_dataset)
 
-    Dataset Chinese Explanations:
-        'Purpose(用途)', 'Category(类别)' are the column headers in the table.
     """
 
     ret = []
@@ -152,7 +146,7 @@ def nc_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     df_data = pd.read_excel(directory + '/corpora/nancahng.xlsx')
 
     # Check for required columns
-    required_columns = ['index', '用途', '类别']   # Dataset Chinese Explanations:
+    required_columns = ['index', 'Purpose', 'Category']   # Dataset Chinese Explanations:
     for col in required_columns:
         if col not in df_data.columns:
             raise ValueError(f"Dataset missing required column: {col}")
@@ -162,7 +156,7 @@ def nc_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
     test_examples = []
 
     # Group by category and sample training data
-    grouped = df_data.groupby('类别')
+    grouped = df_data.groupby('Category')
     for label, group in grouped:
         # Calculate number of training samples for this category
         class_total = len(group)
@@ -177,14 +171,14 @@ def nc_dataset(directory='../data', train=True, test=False, clean_txt=False, tra
         for idx, row in train_group.iterrows():
             train_examples.append({
                 'my_index': row['index'],
-                'text': str(row['用途']),
-                'label': row['类别']
+                'text': str(row['Purpose']),
+                'label': row['Category']
             })
 
     # Get all data for testing
     index_test = df_data['index'].values.tolist()
-    label_test = df_data['类别'].values.tolist()
-    text_test = df_data['用途'].values.tolist()
+    label_test = df_data['Category'].values.tolist()
+    text_test = df_data['Purpose'].values.tolist()
 
     for index, text in enumerate(text_test):
         test_examples.append({
