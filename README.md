@@ -120,7 +120,7 @@ You can run BERT-OCEn experiments using the `main.py` script.
 
 Next, I will briefly explain how to run the `test` dataset. You can run other datasets by replacing the dataset file read by `pandas` in `src/main.py` and `src/datasets/*.py`.
 
-#### Example: `test` Dataset (Chinese BERT)
+#### Example: `test` Dataset (A subset of Dataset1)
 
 ```bash
 cd <path-to-BERT-OCEn-directory>
