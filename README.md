@@ -21,6 +21,13 @@ The framework is designed to detect **fund misuse, irregular expenditures, and a
 
 ## Dataset Information
 
+### Non-Public Institutional Datasets
+
+The following datasets originate from a government agency and have been anonymized:
+
+- **Dataset_1**: `data/corpora/yixing.xlsx`
+- **Dataset_2**: `data/corpora/nanchang.xlsx`
+- 
 ### Provided Test Dataset
 
 A small test dataset is included for validation and format reference:  
@@ -37,12 +44,6 @@ The codebase is compatible with standard benchmark datasets:
 - **IMDB Movie Reviews**  
   https://ai.stanford.edu/~amaas/data/sentiment/
 
-### Non-Public Institutional Datasets
-
-The following datasets originate from a government agency and have been anonymized:
-
-- **Dataset1**: `data/corpora/yixing.xlsx`
-- **Dataset2**: `data/corpora/nanchang.xlsx`
 
 ### Dataset Schema
 
