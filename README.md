@@ -9,8 +9,8 @@ This repository implements a **three-stage anomaly detection pipeline** for text
 1. **Domain-adaptive BERT fine-tuning**  
    Adapts a pre-trained BERT model to the target domain using only normal-class samples.
 
-2. **One-Class Classification with CVDD**  
-   Uses the **Context Vector Data Description (CVDD)** algorithm with multi-head self-attention to learn normal semantic patterns.
+2. **One-Class Classification with MC-AOCC**  
+   Uses the **MC-AOCC** algorithm with multi-head self-attention to learn normal semantic patterns.
 
 3. **Ensemble Integration**  
    Combines multiple one-class detectors via **stacking** or **max-voting** strategies to improve robustness and detection performance.
