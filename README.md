@@ -168,7 +168,7 @@ Have a look into `main.py` for all the possible arguments and options.
 - Last transformer layers are updated
 - Domain adaptation improves semantic representation
 
-### 2. MC-AOOC One-Class Learning
+### 2. MC-AOCC One-Class Learning
 
 - Multi-head self-attention extracts contextual features
 - Multiple context vectors represent normal semantics
