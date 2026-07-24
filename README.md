@@ -65,7 +65,7 @@ The project is organized as follows:
 ├── src/
 │   ├── main.py                  # CLI entry point
 │   ├── datasets/                # Dataset loaders
-│   ├── networks/                # CVDD & BERT modules
+│   ├── networks/                # OCC & BERT modules
 │   ├── baselines/               # OC-SVM baseline
 │   ├── ensemble/                # Ensemble methods
 │   └── utils/                   # Utilities & visualization
@@ -78,7 +78,7 @@ The project is organized as follows:
 
 Key components:
 
-- **CVDDNet**: Self-attention-based one-class detector
+- **OCC-Net**: Self-attention-based one-class detector
 - **BERT Embedding**: Domain-adaptive fine-tuning
 - **Ensemble Module**: Stacking & max aggregation
 
@@ -168,7 +168,7 @@ Have a look into `main.py` for all the possible arguments and options.
 - Last transformer layers are updated
 - Domain adaptation improves semantic representation
 
-### 2. CVDD One-Class Learning
+### 2. MC-AOOC One-Class Learning
 
 - Multi-head self-attention extracts contextual features
 - Multiple context vectors represent normal semantics
